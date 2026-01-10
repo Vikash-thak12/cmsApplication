@@ -100,7 +100,8 @@ def authorized():
         # Note: In a real app, we'd use the 'name' property from session["user"] below
         # Here, we'll use the admin username for anyone who is authenticated by MS
         user = User.query.filter_by(username="admin").first()
-        login_user(user)
+        if user:
+          login_user(user)
         _save_cache(cache)
     return redirect(url_for('home'))
 
@@ -126,8 +127,8 @@ def _load_cache():
 
 def _save_cache(cache):
     # TODO: Save the cache, if it has changed
-     if cache.has_state_changed:
-        session["token_cache"] = cache.serialize()
+    if cache.has_state_changed:
+       session["token_cache"] = cache.serialize()
 
 def _build_msal_app(cache=None, authority=None):
     # TODO: Return a ConfidentialClientApplication
