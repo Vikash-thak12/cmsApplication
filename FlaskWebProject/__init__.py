@@ -9,6 +9,7 @@ from flask_login import LoginManager
 from flask_session import Session
 
 app = Flask(__name__)
+app.config['PREFERRED_URL_SCHEME'] = 'https'
 app.config.from_object(Config)
 # TODO: Add any logging levels and handlers with app.logger
 logging.basicConfig(level=logging.INFO)
